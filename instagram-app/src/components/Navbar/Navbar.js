@@ -6,7 +6,7 @@ class Navbar extends Component {
   render() {
     return (
       <nav className="navbar">
-        <div className="container d-flex">
+        <div className="container px-0 d-flex">
           <div className="col-3 d-flex align-items-center">
             {/* Instagram Icon - On Homepage */}
             <Link className="navbar-brand" to="/home">
