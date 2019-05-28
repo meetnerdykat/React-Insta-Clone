@@ -9,7 +9,7 @@ class Navbar extends Component {
         <div className="container px-0 d-flex">
           <div className="col-3 d-flex align-items-center">
             {/* Instagram Icon - On Homepage */}
-            <Link className="navbar-brand" to="/home">
+            <Link className="navbar-brand" to="/postcontainer">
               <svg
                 width="27"
                 height="28"
@@ -63,18 +63,20 @@ class Navbar extends Component {
             </div>
 
             {/* Instagram Word */}
-            <h4
-              id="instagram-word"
-              style={{
-                fontFamily: 'Cookie',
-                fontSize: '2.25em',
-                fontWeight: '500',
-                paddingTop: '15px',
-                marginLeft: '-10px'
-              }}
-            >
-              Instagram
-            </h4>
+            <Link to="/postcontainer" className="nav-link text-dark">
+              <h4
+                id="instagram-word"
+                style={{
+                  fontFamily: 'Cookie',
+                  fontSize: '2.25em',
+                  fontWeight: '500',
+                  paddingTop: '15px',
+                  marginLeft: '-10px'
+                }}
+              >
+                Instagram
+              </h4>
+            </Link>
           </div>
 
           {/* SearchBox Form */}
