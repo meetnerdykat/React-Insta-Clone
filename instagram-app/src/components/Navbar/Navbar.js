@@ -3,6 +3,29 @@ import './Navbar.css';
 import { Link } from 'react-router-dom';
 
 class Navbar extends Component {
+  // constructor gives access to props
+  constructor(props) {
+    super(props);
+    // console.log(props);
+
+    this.state = {
+      searchInput: ''
+    };
+  }
+
+  onChangeHandler = event => {
+    this.setState({
+      searchInput: event.target.value
+    });
+  };
+
+  onSubmitHandler = event => {
+    event.preventDefault();
+    // fun part
+    // call a function havent made yet
+    this.props.filterPosts(this.state.searchInput);
+  };
+
   render() {
     return (
       <nav className="navbar">
@@ -79,11 +102,19 @@ class Navbar extends Component {
             </Link>
           </div>
 
-          {/* SearchBox Form */}
+          {/* 
+          SearchBox Form 
+          -add onChange to the input
+          */}
           <div className="col-6 d-flex justify-content-center">
-            <form className="form-inline px-4 mx-5 my-lg-0 border rounded d-none d-md-block">
+            <form
+              onSubmit={this.onSubmitHandler}
+              className="form-inline px-4 mx-5 my-lg-0 border rounded d-none d-md-block"
+            >
               <div className="input-group my-1">
                 <input
+                  onChange={this.onChangeHandler}
+                  value={this.state.searchInput}
                   type="text"
                   className="form-control border-0 bg-transparent"
                   placeholder="Search"

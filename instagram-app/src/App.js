@@ -1,34 +1,51 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './App.css';
+import 'moment-timezone';
+import { posts } from './dummy-data';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import SearchBar from './components/SearchBar/SearchBar';
 import PostContainer from './components/PostContainer/PostContainer';
-// import Home from './components/Pages/Home';
-// import Explore from './components/Pages/Explore';
-// import Likes from './components/Pages/Likes';
-// import User from './components/Pages/User';
 
-function App() {
-  return (
-    <Router>
-      <div className="App">
-        <SearchBar />
-        <PostContainer />
+class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      thePosts: posts
+    };
+  }
 
-        {/* Takes us to Home */}
-        <Route exact path="/" component={PostContainer} />
+  filterPosts = username => {
+    this.setState({
+      // update the state by
+      thePosts: posts.filter(post => post.username === username)
+    });
+  };
 
-        {/* Takes us to Explore */}
-        {/* <Route path="/explore" component={Explore} /> */}
+  render() {
+    return (
+      <Router>
+        <div className="App">
+          <SearchBar filterPosts={this.filterPosts} />
 
-        {/* Takes us to Likes */}
-        {/* <Route path="/likes" component={Likes} /> */}
+          <div className="post-container">
+            {this.state.thePosts.map(post => (
+              <PostContainer
+                key={post.id}
+                username={post.username}
+                thumbnailUrl={post.thumbnailUrl}
+                imageUrl={post.imageUrl}
+                likes={post.likes}
+                comments={post.comments}
+              />
+            ))}
+          </div>
 
-        {/* Takes us to User */}
-        {/* <Route path="/user" component={User} /> */}
-      </div>
-    </Router>
-  );
+          {/* Takes us to Home */}
+          <Route exact path="/" component={PostContainer} />
+        </div>
+      </Router>
+    );
+  }
 }
 
 export default App;
